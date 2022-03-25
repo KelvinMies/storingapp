@@ -44,7 +44,7 @@ if(isset($errors))
 require_once 'conn.php';
 
 //2. Query
-$query ="INSERT INTO meldingen (attractie, type,  capaciteit, prioriteit, melder, overige_info) VALUES(:attractie, :type, :capaciteit, :prioriteit, :melder, :overige_info)";
+$query ="INSERT INTO meldingen (attractie, type,  capaciteit, prioriteit, melder, gemeld_op, overige_info) VALUES(:attractie, :type, :capaciteit, :prioriteit, :melder, :gemeld_op, :overige_info)";
 
 //3. Prepare
 $statement = $conn->prepare($query);
@@ -55,6 +55,7 @@ $statement->execute([
 	":capaciteit" => $capaciteit,
 	":prioriteit" => $prioriteit,
 	":melder" => $melder,
+	":gemeld_op" => $gemeld_op,
 	":overige_info" => $overig,
 ]);
 
