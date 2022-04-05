@@ -35,6 +35,11 @@ if($action == "create"){
 	{
 		$errors[] = "Vul een naam in.";
 	}
+	$gemeld_op = $_POST['gemeld_op'];
+	if(empty($gemeld_op))
+	{
+		$errors[]= "Vul een datum in.";
+	}
 	$overig = $_POST['overig'];
 
 	if(isset($errors))
@@ -64,9 +69,12 @@ if($action == "create"){
 
 	header("Location:../meldingen/index.php?msg=Melding opgeslagen");
 }
+
+$action = $_POST['action'];
 if ($action == "update") {
 
 	$capaciteit = $_POST['capaciteit'];
+	$prioriteit = $_POST['prioriteit'];
 	if (isset($_POST['prioriteit']))
 	{
 		$prioriteit = true;
@@ -75,18 +83,24 @@ if ($action == "update") {
 	{
 		$prioriteit = false;
 	}
+
 	$melder	= $_POST['melder'];
 	$overig = $_POST['overig'];
 
 	require_once 'conn.php';
-	$query = "UPDATE meldingen SET capaciteit = :capaciteit, prioriteit = :prioriteit, melder = $melder, overig = $overig";
+
+	$query = "UPDATE meldingen SET capaciteit = :capaciteit, prioriteit = :prioriteit, melder = :melder, overige_info = :overige_info WHERE id = :id";
+
 	$statement = $conn->prepare($query);
+
 	$statement->execute([
 		
 		":capaciteit" => $capaciteit,
 		":prioriteit" => $prioriteit,
 		":melder" => $melder,
 		":overige_info" => $overig,
+		
+		
 	]);
 
 
