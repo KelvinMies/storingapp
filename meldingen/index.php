@@ -36,6 +36,7 @@
                 <th>Gemeld op</th>
                 <th>Overige info</th>
                 <th>Prioriteit</th>
+                <th>Aanpassen</th>
             </tr>
             <?php foreach ($meldingen as $melding): ?>
                 <tr>
@@ -53,6 +54,7 @@
                     {
                         echo "Nee";                  
                     }?></td>
+                    <td><?php echo "<a href='edit.php?id={$melding['id']}'>Aanpassen</a>"; ?></td>
                 </tr>
             <?php endforeach; ?>
         </table>
