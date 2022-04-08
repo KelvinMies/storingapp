@@ -44,7 +44,7 @@
                     <td><?php echo $melding['type']; ?></td>
                     <td><?php echo $melding['capaciteit']; ?></td>
                     <td><?php echo $melding['melder']; ?></td>
-                    <td><?php echo $melding['gemeld_op']; ?></td>
+                    <td><?php echo $melding['gemeld_op']; ?></td> 
                     <td><?php echo $melding['overige_info']; ?></td>
                     <td><?php if ($melding['prioriteit'] == 1) 
                     {

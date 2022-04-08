@@ -1,6 +1,6 @@
 <?php
 $action = $_POST['action'];
-require_once 'conn.php';
+
 if($action == "create"){
 	//Variabelen vullen
 	$attractie = $_POST['attractie'];
@@ -46,6 +46,8 @@ if($action == "create"){
 		var_dump($errors);
 		die();
 	}
+	require_once 'conn.php';
+
 	$query ="INSERT INTO meldingen (attractie, type,  capaciteit, prioriteit, melder, gemeld_op, overige_info) VALUES(:attractie, :type, :capaciteit, :prioriteit, :melder, :gemeld_op, :overige_info)";
 
 	$statement = $conn->prepare($query);
@@ -66,27 +68,19 @@ if($action == "create"){
 if ($action == "update") {
 
 	$capaciteit = $_POST['capaciteit'];
-	$prioriteit = $_POST['prioriteit'];
-	if (isset($_POST['prioriteit']))
-	{
-		$prioriteit = true;
-	}
-	else
-	{
-		$prioriteit = false;
-	}
+	$id = $_POST["id"];
+	require_once 'conn.php';
 
 	$query = "UPDATE meldingen SET capaciteit = :capaciteit, prioriteit = :prioriteit, melder = :melder, overige_info = :overige_info WHERE id = :id";
-
 
 	$statement = $conn->prepare($query);
 
 	$statement->execute([	
 		":capaciteit" => $capaciteit,
-		":prioriteit" => $prioriteit,
+		":prioriteit" => isset($_POST['prioriteit']),
 		":melder" => $_POST['melder'],
 		":overige_info" => $_POST['overig'],
-		":id" => $_POST['id'],
+		":id" => $id
 	]);
 	header("Location:../meldingen/index.php?msg=Melding updated");
 }

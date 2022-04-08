@@ -38,7 +38,7 @@
 
         <form action="../backend/meldingenController.php" method="POST">
             <input type="hidden" name="action" value="update">
-            <input type="hidden" name="id" value="<?php $melding['id']; ?>">
+            <input type="hidden" name="id" value="<?php echo $melding['id']; ?>">
             <!-- (voeg hier opdracht 7 toe) -->
 
             <div class="form-group">
@@ -58,8 +58,7 @@
             <div class="form-group">
                 <label for="prioriteit">Prio:</label>
                 <!-- Let op: de checkbox blijft nu altijd uit, pas dit nog aan -->
-                <input type="checkbox" name="prioriteit" id="prioriteit" 
-                <?php if ($melding['prioriteit'] == "1") echo 'checked';?>>
+                <input type="checkbox" name="prioriteit" id="prioriteit" <?= ($melding['prioriteit'] == "1")? "checked":"";?>>
                 <label for="prioriteit">Melding met prioriteit</label>
             </div>
             <div class="form-group"> 
